@@ -1,8 +1,8 @@
-class Box{
+class Cubie{
     PVector pos;
     float len;
 
-    Box(float x, float y, float z, float side) {
+    Cubie(float x, float y, float z, float side) {
         pos = new PVector(x, y, z);
         len = side;
     }

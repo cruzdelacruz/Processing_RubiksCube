@@ -3,6 +3,8 @@ import processing.data.*;
 import processing.event.*; 
 import processing.opengl.*; 
 
+import peasy.*; 
+
 import java.util.HashMap; 
 import java.util.ArrayList; 
 import java.io.File; 
@@ -14,18 +16,24 @@ import java.io.IOException;
 
 public class RubiksCube extends PApplet {
 
+
+
+PeasyCam cam;
+
 int dim = 3;
-Box[][][] cube = new Box[dim][dim][dim];
+Cubie[][][] cube = new Cubie[dim][dim][dim];
 public void setup(){
     
+    cam = new PeasyCam(this, 400);
     for (int i = 0; i < dim; i++) {
        for (int j = 0; j < dim; j++) {
            for (int k = 0; k < dim; k++) {
                float len =  50;
-               float x = len * i;
-               float y = len * j;
-               float z = len * k;
-               cube[i][j][k] = new Box(x, y, z, len);
+               float offset = (dim - 1) * len * 0.5f;
+               float x = len * i - offset;
+               float y = len * j - offset;
+               float z = len * k - offset;
+               cube[i][j][k] = new Cubie(x, y, z, len);
             }
         } 
     }
@@ -42,11 +50,11 @@ public void draw(){
         } 
     }
 }
-class Box{
+class Cubie{
     PVector pos;
     float len;
 
-    Box(float x, float y, float z, float side) {
+    Cubie(float x, float y, float z, float side) {
         pos = new PVector(x, y, z);
         len = side;
     }
